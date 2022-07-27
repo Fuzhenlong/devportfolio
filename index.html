@@ -16,6 +16,136 @@
 </head>
 
 <body>
+    <script src="js/jquery-2.2.0.min.js"></script>
+    <script>
+        var a_idx = 0;
+        jQuery(document).ready(function ($) {
+            addTips = function (e) {
+                var a = new Array("");
+                var i = $("<span />").text(a[a_idx]);
+                a_idx = (a_idx + 1) % a.length;
+                var x = e.pageX, y = e.pageY;
+                i.css({
+                    "z-index": 999999999999999999999999999999999999999999999999999999999999999999999,
+                    "top": y - 20,
+                    "left": x,
+                    "position": "absolute",
+                    "font-weight": "bold",
+                    "color": "#ff6651"
+                });
+
+                $("body").append(i);
+                i.animate({ "top": y - 180, "opacity": 0 }, 1500, function () { i.remove() })
+                return false;
+            }
+            //绑定鼠标左键
+            $("body").click(addTips);
+            //绑定鼠标左键
+            $("body").bind("contextmenu", addTips)
+        });
+    </script>
+    <script>
+        function o(w, v, i) {
+            return w.getAttribute(v) || i
+        }
+        function j(i) {
+            return document.getElementsByTagName(i)
+        }
+        function l() {
+            var i = j("script"), w = i.length, v = i[w - 1];
+            return { l: w, z: o(v, "zIndex", -1), o: o(v, "opacity", 0.5), c: o(v, "color", "0,0,0"), n: o(v, "count", 99) }
+        }
+        function k() {
+            r = u.width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth,
+                n = u.height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
+        }
+        function b() {
+            e.clearRect(0, 0, r, n);
+            var w = [f].concat(t);
+            var x, v, A, B, z, y;
+            t.forEach(function (i) {
+                i.x += i.xa,
+                    i.y += i.ya,
+                    i.xa *= i.x > r || i.x < 0 ? -1 : 1,
+                    i.ya *= i.y > n || i.y < 0 ? -1 : 1,
+                    e.fillRect(i.x - 0.5, i.y - 0.5, 1, 1);
+                for (v = 0; v < w.length; v++) {
+                    x = w[v];
+                    if (i !== x && null !== x.x && null !== x.y) {
+                        B = i.x - x.x, z = i.y - x.y, y = B * B + z * z;
+                        y < x.max && (x === f && y >= x.max / 2 && (i.x -= 0.03 * B, i.y -= 0.03 * z), A = (x.max - y) / x.max, e.beginPath(), e.lineWidth = A / 2, e.strokeStyle = "rgba(" + s.c + "," + (A + 0.2) + ")", e.moveTo(i.x, i.y), e.lineTo(x.x, x.y), e.stroke())
+                    }
+                }
+                w.splice(w.indexOf(i), 1)
+            }), m(b)
+        }
+        var u = document.createElement("canvas"), s = l(), c = "c_n" + s.l, e = u.getContext("2d"), r, n,
+            m = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function (i) {
+                window.setTimeout(i, 1000 / 45)
+            },
+            a = Math.random, f = { x: null, y: null, max: 20000 };
+        u.className = "particle_canvas";
+        var browserName = navigator.userAgent.toLowerCase();
+        if (/msie/i.test(browserName) && !/opera/.test(browserName)) {
+            u.className += ' ie10_gte';
+        };
+        u.id = c;
+        u.style.cssText = "position:fixed;top:0;left:0;z-index:" + s.z + ";opacity:" + s.o;
+        j("body")[0].appendChild(u);
+        k(), window.onresize = k;
+        window.onmousemove = function (i) {
+            i = i || window.event,
+                f.x = i.clientX,
+                f.y = i.clientY
+        },
+            window.onmouseout = function () {
+                f.x = null,
+                    f.y = null
+            };
+        for (var t = [], p = 0; s.n > p; p++) {
+            var h = a() * r,
+                g = a() * n,
+                q = 2 * a() - 1,
+                d = 2 * a() - 1;
+            t.push({ x: h, y: g, xa: q, ya: d, max: 6000 })
+        }
+        setTimeout(function () { b() }, 100)
+    </script>
+    <style>
+        .github-corner:hover .octo-arm {
+            animation: octocat-wave 560ms ease-in-out
+        }
+
+        @keyframes octocat-wave {
+
+            0%,
+            100% {
+                transform: rotate(0)
+            }
+
+            20%,
+            60% {
+                transform: rotate(-25deg)
+            }
+
+            40%,
+            80% {
+                transform: rotate(10deg)
+            }
+        }
+
+        @media (max-width:500px) {
+            .github-corner:hover .octo-arm {
+                animation: none
+            }
+
+            .github-corner .octo-arm {
+                animation: octocat-wave 560ms ease-in-out
+            }
+        }
+    </style>
+
+
     <div id="mobile-menu-open" class="shadow-large">
         <i class="fa fa-bars" aria-hidden="true"></i>
     </div>
@@ -49,8 +179,8 @@
 
     <div id="lead">
         <div id="lead-content">
-            <h1>你好，我是猪小明</h1>
-            <h2>软件工程师</h2>
+            <h1>你好，我是付振龙</h1>
+            <h2>Unity工程师</h2>
             <a href="assets/resume.pdf" target="_blank" class="btn-rounded-white">简历下载</a>
         </div>
         <!-- End #lead-content -->
@@ -76,7 +206,7 @@
                 </div>
                 <div class="col-md-8 vertical-center">
                     <p>
-                        深度互联网从业人员，对互联网保持高度的敏感性和关注度，熟悉产品开发流程，有很强的产品规划、需求分析、交互设计能力，能独立承担APP和WEB项目的管控工作，善于沟通，贴近用户。
+                        深度互联网从业人员，对互联网保持高度的敏感性和关注度，熟悉产品开发流程，有很强的产品规划、需求分析、开发设计能力，擅长虚拟仿真项目开发，熟练使用unity、3dmax、PS等软件，参与过安卓、PC、WebGL等不同平台的完整开发项目，具备一定项目开发经验，熟悉实际开发流程，具备较强的学习能力及表达沟通能力；能迅速适应各种环境，并融入其中，能在压力环境下完成挑战性工作；工作态度认真负责，具有团队合作精神。
                     </p>
                 </div>
 
@@ -85,11 +215,11 @@
     </div>
     <!-- End #about -->
 
-    <div id="experience" class="background-alt">
+   <!-- <div id="experience" class="background-alt">
         <h2 class="heading">实习经历</h2>
         <div id="experience-timeline">
 
-            <!-- One Experience Block -->
+         
             <div data-date="2012.09 - 2013.06">
                 <h3>厦门市职业圈信息科技有限公司</h3>
                 <h4>市场营销（实习生</h4>
@@ -99,7 +229,7 @@
                     实时了解行业的变化，跟踪客户的详细数据，为客户制定更完善的投放计划（合作过珍爱网、世纪佳缘、56视频、京东等客户）
                 </p>
             </div>
-            <!-- End of One Experience Block -->
+       
 
 
 
@@ -114,7 +244,8 @@
             </div>
 
         </div>
-    </div>
+    </div> -->
+
     <!-- End #experience -->
 
     <div id="education">
@@ -122,81 +253,50 @@
 
         <!-- One Education Block -->
         <div class="education-block">
-            <h3>职业圈科技大学</h3>
-            <span class="education-date">2009.09 - 2013.07</span>
-            <h4>市场营销（本科）</h4>
+            <h3>福建师范大学协和学院</h3>
+            <span class="education-date">2017.09 - 2022.06</span>
+            <h4>计算机科学与技术专业（本科）</h4>
             <p>
                 主修课程：
-                管理学、微观经济学、宏观经济学、管理信息系统、统计学、会计学、财务管理、市场营销、经济法、消费者行为学、国际市场营销
+                C++/C#/数据结构，vr游戏开发，unity3d，3dmax，微信小程序开发，C语言、编译原理、软件测试、软件需求分析、计算机网络、HTML5、人机交互等
             </p>
         </div>
         <!-- End of One Education Block -->
 
 
     </div>
+    <div id="skills">
+        <h2 class="heading">个人能力</h2>
+        <ul>
+
+
+
+            <li> 熟练使用C#编程</li>
+            <li>熟悉数据结构、算法知识</li>
+            <li>熟悉Post processing 、Dotween、cinemachine等常用unity插件 </li>
+            <li>对安卓移动端和PC端以及webgl网页开发均有一定开发经验</li>
+
+        </ul>
+    </div>
     <!-- End #education -->
 
-    <div id="projects" class="background-alt-nth">
-        <h2 class="heading">2D 项目</h2>
-        <div class="container">
-
-            <!-- One Project 2D Block -->
-            <div class="project shadow-large">
-                <div class="project-image">
-                    <img class="image" src="assets/thumbs/image01-thumb.jpg" alt="assets/fulls/image01-full.jpg" />
-                </div>
-            </div>
-            <!-- End of One Project 2D Block -->
 
 
-            <div class="project shadow-large">
-                <div class="project-image">
-                    <img class="image" src="assets/thumbs/image02-thumb.jpg" alt="assets/fulls/image02-full.jpg" />
-                </div>
-                <!-- End .project-image -->
-            </div>
-            <!-- End .project -->
-
-        </div>
-    </div>
 
     <div id="projects" class="background-alt-nth">
-        <h2 class="heading">写实风格2D</h2>
+        <h2 class="heading">PC Projects</h2>
         <div class="container">
 
-            <div class="project shadow-large">
-                <div class="project-image">
-                    <img class="image" src="assets/thumbs/image01-thumb.jpg" alt="assets/fulls/image01-full.jpg" />
-                </div>
-                <!-- End .project-image -->
-            </div>
-            <!-- End .project -->
-
-            <div class="project shadow-large">
-                <div class="project-image">
-                    <img class="image" src="assets/thumbs/image02-thumb.jpg" alt="assets/fulls/image02-full.jpg" />
-                </div>
-                <!-- End .project-image -->
-            </div>
-            <!-- End .project -->
-
-        </div>
-    </div>
-
-    <div id="projects" class="background-alt-nth">
-        <h2 class="heading">3D Projects</h2>
-        <div class="container">
-
-            <!-- One Project Video Block -->
+         
             <div class="project shadow-large">
                 <div class="project-video">
-                    <img class="image" src="assets/thumbs/model01-thumb.jpg" alt="assets/fulls/model01-full.mp4" />
+                    <img class="image" src="assets/thumbs/付振龙_基于Unity瓷器文化交互系统.jpg" alt="assets/fulls付振龙_基于Unity瓷器文化交互系统.mp4" />
                 </div>
             </div>
-            <!-- End of One Project Video Block -->
+          
 
 
-            <div class="project shadow-large">
+            <!-- <div class="project shadow-large">
                 <div class="project-video">
                     <img class="image" src="assets/thumbs/model02-thumb.jpg" alt="assets/fulls/model02-full.mp4" />
                 </div>
@@ -207,22 +307,22 @@
                     <img class="image" src="assets/thumbs/animation01-thumb.jpg"
                         alt="assets/fulls/animation01-full.mp4" />
                 </div>
-            </div>
+            </div> -->
 
         </div>
-    </div>
-
+    </div> 
+<!-- 
     <div id="projects" class="background-alt-nth">
         <h2 class="heading">3D Models</h2>
         <div class="container">
 
-            <!-- One Project 3DModel Block -->
+       
             <div class="project shadow-large">
                 <div class="project-glb">
                     <img class="image" src="assets/thumbs/model03-thumb.jpg" alt="assets/fulls/model03-full.glb" />
                 </div>
             </div>
-            <!-- End of One Project 3DModel Block -->
+        
 
 
             <div class="project shadow-large">
@@ -232,11 +332,11 @@
             </div>
 
         </div>
-    </div>
+    </div> -->
 
 
     <div id="projects" class="background-alt-nth">
-        <h2 class="heading">Unity3d Projects</h2>
+        <h2 class="heading">Webgl Projects</h2>
         <div class="container-game">
 
             <!-- One Project Game Block -->
@@ -254,35 +354,6 @@
             </div>
             <!-- End of One Project Game Block -->
 
-            <div class="project-game shadow-large">
-                <div class="project-image">
-                    <img src="assets/thumbs/Counter-thumb.jpg" />
-                </div>
-                <!-- End .project-image -->
-                <div class="project-info">
-                    <h3>Counter webgl demo</h3>
-                    <p>
-                        这是一个在itch.io上的Counter Webgl 的 Demo.
-                    </p>
-                    <a href="https://curryricegames.itch.io/countertest" target="_blank">View Project</a>
-                </div>
-                <!-- End .project-info -->
-            </div>
-            <!-- End .project -->
-            <div class="project-game shadow-large">
-                <div class="project-image">
-                    <img src="assets/thumbs/Counter-thumb.jpg" />
-                </div>
-                <!-- End .project-image -->
-                <div class="project-info">
-                    <h3>Counter webgl demo</h3>
-                    <p>
-                        这是一个在Github pages上的Counter Webgl 的 Demo.
-                    </p>
-                    <a href="https://bretthuang2019.github.io/CounterWebgl/" target="_blank">View Project</a>
-                </div>
-                <!-- End .project-info -->
-            </div>
             <!-- End .project -->
         </div>
     </div>
@@ -316,15 +387,7 @@
 
     <!-- End #projects -->
 
-    <div id="skills">
-        <h2 class="heading">Skills</h2>
-        <ul>
-            <li>普通话一级甲等</li>
-            <li>大学英语四级</li>
-            <li>大学英语六级</li>
-            <li>全国计算机二级考试</li>
-        </ul>
-    </div>
+
     <!-- End #skills -->
 
     <div id="contact">
@@ -334,25 +397,22 @@
             <!-- One Social Icon Block -->
             <article>
                 <i class="fa fa-envelope fa-fw"></i>
-                <span>88888888@qq.com</span>
+                <span>f54201125@126.com</span>
             </article>
             <!-- End of One Social Icon Block -->
 
             <article>
                 <i class="fa fa-phone fa-fw"></i>
-                <span>13868686868</span>
+                <span>18060567230</span>
             </article>
-            <article>
-                <i class="fa fa-home fa-fw"></i>
-                <span>301, 24 test St, Montreal, QC, H1A2C2</span>
-            </article>
+          
             <article>
                 <i class="fa fa-weixin fa-fw"></i>
-                <span>13868686868</span>
+                <span>18060567230</span>
             </article>
             <article>
                 <i class="fa fa-qq fa-fw"></i>
-                <span>78787878</span>
+                <span>1977024031</span>
             </article>
         </div>
         <!-- End #contact-form -->
@@ -364,7 +424,7 @@
             <div class="row">
                 <div class="col-sm-5 copyright">
                     <p>
-                        Copyright &copy; <span id="current-year">2022</span> ZhuXiaoMing Portfolio
+                        Copyright &copy; <span id="current-year">2022</span> FuZhenLong
                     </p>
                 </div>
                 <div class="col-sm-2 top">
